@@ -1,0 +1,112 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    namespace 'com.example.topnewapp'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.topnewapp"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
+        buildConfigField("String", "API_KEY", "\"b3216f4f5cf44891a58515447f45685d\"")
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        jvmToolchain(17)
+    }
+
+    buildFeatures {
+        buildConfig = true
+        viewBinding true
+    }
+
+    flavorDimensions "headlineSource"
+
+    productFlavors {
+        bbc {
+            dimension "headlineSource"
+            buildConfigField("String", "HEADLINE_SOURCE", "\"bbc-news\"")
+        }
+
+        cnn {
+            dimension "headlineSource"
+            buildConfigField("String", "HEADLINE_SOURCE", "\"ccn-news\"")
+        }
+
+    }
+
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
+
+    //Testing Libs
+    implementation "androidx.test:core:1.5.0"
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation 'org.mockito:mockito-core:3.9.0'
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
+    debugImplementation "androidx.fragment:fragment-testing:1.6.2"
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.2.0"
+
+    //ImageLoading Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    kapt 'com.github.bumptech.glide:compiler:4.13.0'
+
+    //Dependency Injection - HILt
+    implementation("com.google.dagger:hilt-android:2.48.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.48.1")
+
+    //Dependency Injection - HILT TEST
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.48.1'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.48.1'
+
+    //Coroutines
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+
+}

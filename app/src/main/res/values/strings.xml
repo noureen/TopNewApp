@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">HeadlinesApp</string>
+    <string name="title_list">Headlines</string>
+    <string name="title_detail">Headline Detail</string>
+    <string name="headline_title">Headline Title</string>
+    <string name="headline_description">Headline Description</string>
+    <string name="headline_content">Headline Content</string>
+    <string name="date">Date</string>
+    <string name="news_provider_name">News Provider Name</string>
+    <string name="api_response_msg">Api response msg</string>
+    <string name="no_headlines_available">No headlines available.</string>
+    <string name="description">Description</string>
+</resources>
